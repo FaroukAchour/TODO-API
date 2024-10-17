@@ -2,12 +2,19 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 const app = express();
 const PORT = 3001;
 const todosFilePath = path.join(__dirname, "todos.json");
 
 app.use(bodyParser.json());
+
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
 
 const readTodos = () => {
   if (!fs.existsSync(todosFilePath)) {
